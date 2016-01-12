@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, View, Text, ListView } from 'react-native';
+import React, { Component, Platform, View, Text, ListView } from 'react-native';
 import Row from '../views/Row';
 
 export default class SelectionScene extends Component {
@@ -15,7 +15,11 @@ export default class SelectionScene extends Component {
 
   render() {
     return (
-      <ListView dataSource={this.state.dataSource} renderRow={(rowData) => <Row onPress={this._onRowPress.bind(this, rowData)} data={rowData} />} />
+      <ListView
+        style={{paddingTop:(Platform.OS === 'ios' ? 22 : 0)}}
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <Row onPress={this._onRowPress.bind(this, rowData)}
+        data={rowData} />} />
     );
   }
 

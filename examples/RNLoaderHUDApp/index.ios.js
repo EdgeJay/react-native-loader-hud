@@ -9,7 +9,6 @@ import React, {
   StyleSheet,
   Navigator,
 } from 'react-native';
-import RNLoaderHUD from 'react-native-loader-hud';
 import SelectionScene from './scenes/SelectionScene';
 import DemoScene from './scenes/DemoScene';
 
@@ -20,7 +19,6 @@ class RNLoaderHUDApp extends Component {
         configureScene={this._configureScene.bind(this)}
         renderScene={this._renderScene.bind(this)}
         style={styles.container}>
-        <SelectionView />
       </Navigator>
     );
   }
@@ -30,7 +28,7 @@ class RNLoaderHUDApp extends Component {
       return <SelectionScene navigator={navigator} />
     }
     else if (route.name === 'DemoScene') {
-      return <DemoScene navigator={navigator} />
+      return <DemoScene type={route.type} navigator={navigator} />
     }
   }
 
@@ -41,7 +39,6 @@ class RNLoaderHUDApp extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 22,
     flex: 1,
     backgroundColor: 'white',
   },

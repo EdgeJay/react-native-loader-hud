@@ -9,7 +9,6 @@ import React, {
   StyleSheet,
   Navigator,
 } from 'react-native';
-import RNLoaderHUD from 'react-native-loader-hud';
 import SelectionScene from './scenes/SelectionScene';
 import DemoScene from './scenes/DemoScene';
 
