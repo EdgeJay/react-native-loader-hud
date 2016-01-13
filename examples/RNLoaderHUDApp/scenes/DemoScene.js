@@ -29,9 +29,14 @@ export default class DemoScene extends Component {
         {(() => {
           if (!this.state.hudVisible) {
             return (
-              <TouchableHighlight onPress={this._onShowHUD}>
-                <Text style={{color:'black'}}>{'Show'}</Text>
-              </TouchableHighlight>
+              <View>
+                <TouchableHighlight onPress={this._onShowHUD}>
+                  <Text style={{color:'black'}}>{'Show'}</Text>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={() => this.props.navigator.pop()}>
+                  <Text style={{color:'black'}}>{'Return to selection'}</Text>
+                </TouchableHighlight>
+              </View>
             );
           }
         })()}
