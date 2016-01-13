@@ -1,12 +1,53 @@
 'use strict';
 
-import React, { Component, Dimensions, Text, View, StyleSheet } from 'react-native';
-//import RNLoaderHUD from 'react-native-loader-hud';
+import React, { Component, Dimensions, Text, View, Image, TouchableHighlight, StyleSheet } from 'react-native';
+import RNLoaderHUD from 'react-native-loader-hud';
 
 export default class DemoScene extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hudVisible: false
+    };
+    this._onShowHUD = this._onShowHUD.bind(this);
+    this._onHideHUD = this._onHideHUD.bind(this);
+  }
+
+  _onShowHUD() {
+    this._loaderHUD.show();
+    this.setState({ hudVisible: true });
+  }
+
+  _onHideHUD() {
+    this._loaderHUD.hide();
+    this.setState({ hudVisible: false });
+  }
+
   render() {
     return (
-      <RNLoaderHUD />
+      <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+        {(() => {
+          if (!this.state.hudVisible) {
+            return (
+              <TouchableHighlight onPress={this._onShowHUD}>
+                <Text style={{color:'black'}}>{'Show'}</Text>
+              </TouchableHighlight>
+            );
+          }
+        })()}
+
+        <RNLoaderHUD ref={(input) => this._loaderHUD = input} />
+
+        {(() => {
+          if (this.state.hudVisible) {
+            return (
+              <TouchableHighlight onPress={this._onHideHUD} style={{position:'absolute', top:30, right:20}}>
+                <Text style={{color:'white'}}>{'Close'}</Text>
+              </TouchableHighlight>
+            );
+          }
+        })()}
+      </View>
     );
   }
 }
@@ -14,55 +55,3 @@ export default class DemoScene extends Component {
 DemoScene.propTypes = {
   type: React.PropTypes.number.isRequired
 };
-
-import Orientation from 'react-native-orientation';
-
-class RNLoaderHUD extends Component {
-  constructor(props) {
-    super(props);
-    this._orientationDidChange = this._orientationDidChange.bind(this);
-  }
-
-  render() {
-    const wd = Dimensions.get('window').width;
-    const ht = Dimensions.get('window').height;
-    const orientation = ((this.state && this.state.orientation) ? this.state.orientation : 'PORTRAIT');
-    console.log(orientation, orientation.indexOf('PORTRAIT'));
-    const styles = StyleSheet.create({
-      root: {
-        flex: 1,
-        width: orientation === 'PORTRAIT' ? wd : ht,
-        height: orientation === 'PORTRAIT' ? ht : wd,
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(51, 51, 51, 0.5)',
-      },
-    });
-
-    return (
-      <View ref={(input) => this._root = input} style={styles.root}>
-      </View>
-    );
-  }
-
-  componentDidMount() {
-    Orientation.addOrientationListener(this._orientationDidChange);
-    Orientation.getOrientation((err, orientation) => {
-      if (orientation) {
-
-        this.setState({ orientation });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    Orientation.removeOrientationListener(this._orientationDidChange);
-  }
-
-  _orientationDidChange(orientation) {
-    this.setState({ orientation });
-  }
-}
