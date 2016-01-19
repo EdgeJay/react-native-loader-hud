@@ -6,7 +6,7 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "react-native": "^0.17.0",
-    "react-native-loader-hud": "^0.1.4"
+    "react-native": ">=0.17.0",
+    "react-native-loader-hud": "^0.1.5"
   }
 }

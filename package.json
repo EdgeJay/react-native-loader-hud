@@ -1,6 +1,6 @@
 {
   "name": "react-native-loader-hud",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Loader animation library for React Native",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/EdgeJay/react-native-loader-hud#readme",
   "peerDependencies": {
-    "react-native": "^0.17.0",
-    "react-native-orientation": "^1.12.1"
+    "react-native": ">=0.17.0",
+    "react-native-orientation": ">=1.12.1"
   }
 }
