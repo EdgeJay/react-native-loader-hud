@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "react-native": ">=0.17.0",
-    "react-native-loader-hud": "^0.1.5"
+    "react-native-loader-hud": "^0.1.6"
   }
 }
